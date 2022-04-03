@@ -1,0 +1,177 @@
+<button mat-menu-item routerLink="/login">
+    <mat-icon>login</mat-icon>
+    <span>Inicia Sesion</span>
+  </button>
+  <button mat-icon-button (click) = "onLogout()">
+      
+    Cerrar Sesion<mat-icon>logout</mat-icon>
+    
+  </button>
+  <button mat-raised-button (click)="Bool_IsEditable = !Bool_IsEditable">
+    {{!Bool_IsEditable ? 'Habilitar modo edicion' : 'Deshabilitar modo edicion'}}
+  </button>
+
+
+
+  <mat-stepper class="stepper" #stepper>
+    
+    <mat-step [stepControl]="SC_Primer_Paso" [editable]="Bool_IsEditable">
+
+      <div fxLayout="column wrap" fxLayoutAlign="center center">
+        <div><h2>Documentos</h2></div>
+        <div><h4>Seleccione los archivos que desea cargar:</h4></div>
+      </div>
+<!--    
+      <mat-card-header>
+        <mat-card-title>Documentos</mat-card-title>
+        <mat-card-subtitle>Selecciones los archivos que desea cargar: </mat-card-subtitle>
+      </mat-card-header>
+    
+      <form [formGroup]="first_form_group"(ngSubmit)="onSubmit()">
+        <mat-card-content>
+        <ng-template matStepLabel>Subir Factura</ng-template>
+        <input type="file" name="name_file_fact" (change)="onChange($event)" required />
+      </mat-card-content>
+       
+       
+        <mat-card-actions>
+          
+          <button mat-mini-fab color="warn" type="submit"><mat-icon>file_upload</mat-icon>
+          </button>
+          
+          
+       
+      </mat-card-actions>
+
+        <p style="text-align: center;"><b>Cargar archivo</b></p>
+    
+    </form>
+
+      <button mat-raised-button matStepperNext style="float: right;">Siguiente</button>
+-->
+    </mat-step>
+    
+    <mat-step [stepControl]="secondFormGroup" [editable]="Bool_IsEditable">
+<!--      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Vista Previa</ng-template>
+ 
+        <pdf-viewer
+        
+        [src]="fileurl"
+        [show-all]="false"
+        [autoresize]="true"
+        [original-size]='true'
+        [fit-to-page]='true'
+        [render-text]='false'
+        (page-rendered)="pageRendered()"
+        style="display: block; height: 300px;"
+        ></pdf-viewer>
+        
+        /* Hay que comentar esto de nuevo */
+        <pdf-viewer [src]="fileurl" [render-text]="true"
+
+         [autoresize]="true" style="display: block;"></pdf-viewer>
+        
+      </form>
+      <div>
+        <button mat-raised-button matStepperPrevious style="float: left;">Anterior</button>
+        <button mat-raised-button matStepperNext style="float: right;">Siguiente</button>
+      </div>-->
+    </mat-step>
+
+    <mat-step [stepControl]="thirdFormGroup" [editable]="Bool_IsEditable">
+<!--      <mat-card-header>
+        <mat-card-title>Factura</mat-card-title>
+        <mat-card-subtitle>Seleccione la posicion del logo: </mat-card-subtitle>
+      </mat-card-header>
+      <form [formGroup]="thirdFormGroup" (ngSubmit)="onSubmitfactdir()">
+      
+      <ng-template matStepLabel>Generar Factura con logo</ng-template>
+      <p></p>
+      
+        <mat-card-actions>
+          <div>
+        <mat-radio-group aria-label="Seleccion una opcion: " formControlName="direction">
+          <mat-radio-button value="izquierda">
+            Izquierda </mat-radio-button>
+          <a></a>
+          <mat-radio-button value="derecha">
+            Derecha </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div>
+        <button mat-mini-fab color="warn" type="submit"><mat-icon>create</mat-icon></button>
+      </div>
+      </mat-card-actions>
+      <p style="text-align: center;"><b>Generar Factura</b></p>
+      </form>
+      <div>
+        <button mat-raised-button matStepperPrevious style="float: left;">Anterior</button>
+        <button mat-raised-button matStepperNext style="float: right;">Siguiente</button>
+      </div>
+     
+    </mat-step>
+    <mat-step [stepControl]="fourthFormGroup" [editable]="isEditable">
+
+      <mat-card-header>
+        <mat-card-title>Imagen Publicitaria</mat-card-title>
+        <mat-card-subtitle>Selecciones la imagen que desea cargar: </mat-card-subtitle>
+      </mat-card-header>
+    
+      <form [formGroup]="fourthFormGroup"(ngSubmit)="onSubmit()">
+        <mat-card-content>
+        <ng-template matStepLabel>Subir Imagen</ng-template>
+        <input type="file" name="name_file_fact" (change)="onChange($event)" required />
+      </mat-card-content>
+       
+       
+        <mat-card-actions>
+          
+          <button mat-mini-fab color="warn" type="submit"><mat-icon>file_upload</mat-icon>
+          </button>
+          
+          
+       
+      </mat-card-actions>
+    </form>
+        <p style="text-align: center;"><b>Cargar Imagen</b></p>
+    
+-->     
+    </mat-step>
+
+    
+    <mat-step [stepControl]="fiveFormGroup" [editable]="Bool_IsEditable">
+<!--
+      <mat-card-header>
+        <mat-card-title>Frase Publicitaria</mat-card-title>
+        <mat-card-subtitle>Ingrese la frase publicitaria: </mat-card-subtitle>
+      </mat-card-header>
+      <form [formGroup]="fiveFormGroup"(ngSubmit)="onSubmit()">
+        <mat-card-content>
+        <ng-template matStepLabel>Colocar frase</ng-template>
+      </mat-card-content>
+        <mat-card-actions>
+          <input type="text" id="Str_Frase_Publicitaria">
+      </mat-card-actions>
+        <p style="text-align: center;"><b>Frase Publicitaria</b></p>
+      </form>
+    </mat-step>
+
+    <mat-step>
+
+      <form [formGroup]="sixFormGroup" (ngSubmit)="onSubmit()">
+      
+      
+      <p></p>
+        
+      </form>
+-->    
+      <!--<button mat-raised-button matStepperPrevious>Regresar</button>-->
+   
+   <!--   <button mat-raised-button (click)="stepper.reset()">Reiniciar</button> -->
+    
+    </mat-step>
+
+
+
+  </mat-stepper>

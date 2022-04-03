@@ -15,8 +15,7 @@ export class LoginComponent implements OnInit {
   public hide = true;
   private token: any;
   private token_error: any;
-  private data_tk: any;
-
+ 
   constructor(private Form_Builder_Login: FormBuilder, private authUserService: AuthUserService,
     private router: Router) { }
 
@@ -26,33 +25,41 @@ export class LoginComponent implements OnInit {
       user: ['', [Validators.required]],
       pass: ['', [Validators.required]]
     })
+
+
   }
   onSubmitLogin() {
+    
     const UserData = {
       username: this.Form_Login.get('user').value,
       password: this.Form_Login.get('pass').value
     }
-    this.authUserService.token();
-    this.token_error = localStorage.getItem('Token_Error');
-    console.log(this.token_error)
-    if (this.token_error == '0') {
+    this.authUserService.token()
+
+    
+    //this.token_error = localStorage.getItem('Token_Error');
+    /*if (this.token_error == '0') {
       Swal.fire(
         { title: 'Error!', text: 'Ocurrió un error, favor contacte al administrador. Codigo de error T019K.', icon: 'error', confirmButtonText: 'Cerrar' }
       );
     }
-    else {
+    else {*/
+      console.log("Aca viene el token Null creo")
+
       this.token = localStorage.getItem('Token');
-      this.data_tk = JSON.parse(this.token).token;
-      this.authUserService.login(this.data_tk, UserData).subscribe(
+      
+      console.log(this.token)
+
+      this.authUserService.login(this.token, UserData).subscribe(
         (res) => {
           if (res) {
             this.router.navigate(["ucf"]);
-            localStorage.removeItem('Token');
             Swal.fire(
               { title: 'Bienvenido!', text: 'Gracias por volver', icon: 'success', confirmButtonText: 'Cerrar' }
             );
+            //localStorage.removeItem('Token');
           }
         });
     }
-  }
+ // }
 }

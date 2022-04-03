@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2'
 import { HttpClientModule } from '@angular/common/http';
-import { UcfComponent } from './view/ucf/ucf/ucf.component';
+import { UcfComponent } from './view/ucf/ucf.component';
 @NgModule({
   declarations: [
     AppComponent,
