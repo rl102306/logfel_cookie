@@ -9,6 +9,7 @@ import { PoliticaPrivacidadComponent } from './view/politica-privacidad/politica
 import { PagoComponent } from './view/pago/pago.component';
 
 const routes: Routes = [
+  {path: '', component:LoginComponent,canActivate:[SlGuard]},
   {path: 'login', component:LoginComponent,canActivate:[SlGuard]},
   {path: 'ucf', component:UcfComponent,canActivate:[NlGuard]},
   {path: 'signup', component:SignupComponent,canActivate:[SlGuard]},

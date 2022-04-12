@@ -35,7 +35,7 @@ export class UploadFactService {
     };
   
 
-    return this.http.post<any>(`${environment.API_URL}/api/posicion/post`,formData);
+    return this.http.post<any>(`${environment.API_URL}/api/posicion/post`,formData,httpOptions);
     
   }
 
