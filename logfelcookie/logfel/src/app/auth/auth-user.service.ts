@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject,Observable, throwError } from 'rxjs';
+import { BehaviorSubject,Observable, Subject, throwError } from 'rxjs';
 import { catchError,map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
@@ -11,30 +11,29 @@ import { Router } from '@angular/router';
 })
 export class AuthUserService {
 
-  private Bool_Login = new BehaviorSubject<boolean>(false);
-  private Token_Response_Valor: any;
+
+  private Bool_Login = new BehaviorSubject<boolean>(this.hasToken());
   private Token_Response_OkLoggin:any;
+  private loggedIn = false;
 
   
   constructor(private http: HttpClient, private route: Router) { }
 
-  get IsLogged(): Observable<boolean>{
+  private hasToken(): boolean {
+    return !!localStorage.getItem('Token')
+  }
+
+  isLoggedIn(): Observable<boolean>{
     return this.Bool_Login.asObservable();
   }
 
-  login(Token:any, autData:User): Observable<any>{
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': 'token ' + Token
-      })
-    };
-
-    return this.http.post<UserResponse>(`${environment.API_URL}/api/login/post`,autData,httpOptions).
+  login(autData:User): Observable<any>{
+    return this.http.post<UserResponse>(`${environment.API_URL}/api/login/post`,autData).
     pipe(
       map(
         (res:UserResponse)=>{
-          this.Bool_Login.next(true);
+          this.loggedIn = true;
+          this.Bool_Login.next(this.loggedIn);
           return res;
         }),
         catchError((err)=> this.handleError(err))
@@ -64,17 +63,18 @@ export class AuthUserService {
         next:(token:JSON) => {
         this.Token_Response_OkLoggin = token;
         const Token_Valor = this.Token_Response_OkLoggin['token'];
-        window.localStorage.setItem('Token', Token_Valor);
+        localStorage.setItem('Token', Token_Valor);
+        return Token_Valor;
       },
         error:(err)=>this.handleError(err)
       }
     );
   }
  
-
   logout(){
+    this.loggedIn = false;
+    this.Bool_Login.next(this.loggedIn);
     localStorage.removeItem('Token');
-    this.Bool_Login.next(false);
-    this.route.navigate(["/"]);
+    this.route.navigate(["login"]);
   }
 }

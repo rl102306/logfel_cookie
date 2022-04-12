@@ -13,7 +13,7 @@ export class SlGuard implements CanActivate {
 
   canActivate():Observable<boolean>{
     
-    return this.authService.IsLogged.pipe(
+    return this.authService.isLoggedIn().pipe(
       take(1),
       map((IsLogged:boolean)=>!IsLogged));
   }

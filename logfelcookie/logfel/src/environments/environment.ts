@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  API_URL:'http://localhost:8000',
+  API_URL:'http://54.166.82.167',
   USER_TOKEN:'logfel_user_token',
-  PASS_TOKEN:'Tokenulog2021$$'
+  PASS_TOKEN:'Tokenulog2022$$'
 };
 
 /*
